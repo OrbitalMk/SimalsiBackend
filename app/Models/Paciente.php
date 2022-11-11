@@ -22,6 +22,5 @@ class Paciente extends Model
         'nacimiento',
         'inss',
         'telefono',
-        'sexo',
     ];
 }

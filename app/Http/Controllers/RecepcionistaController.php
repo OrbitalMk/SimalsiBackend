@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Recepcionista;
 use Illuminate\Http\Request;
 
+/*
+El articulo científico (Evaluación del rendimiento de base de datos NoSQL) es de enfoque cuantitativo,
+ya que en el se realizaron pruebas de rendimiento de los distintos tipos de base de datos NoSQL,
+obteniendo como muestra datos numéricos y con ello poder realizar análisis estadísticos para obtener
+información, y así llegar a ciertas conclusiones que nos permitan confirmar o refutar las hipótesis.
+*/
+
 class RecepcionistaController extends Controller
 {
     /**
@@ -20,6 +27,16 @@ class RecepcionistaController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -27,14 +44,7 @@ class RecepcionistaController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'nombres' => 'max:50|required',
-            'apellidos' => 'max:50|required',
-            'cedula' => 'max:16|required|unique:recepcionistas',
-            'telefono' => 'max:20|required',
-        ]);
-    
-        return Recepcionista::create($data);
+        //
     }
 
     /**
@@ -45,7 +55,18 @@ class RecepcionistaController extends Controller
      */
     public function show(Recepcionista $recepcionista)
     {
-        return $recepcionista;
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Recepcionista  $recepcionista
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Recepcionista $recepcionista)
+    {
+        //
     }
 
     /**
@@ -57,16 +78,7 @@ class RecepcionistaController extends Controller
      */
     public function update(Request $request, Recepcionista $recepcionista)
     {
-        $data = $request->validate([
-            'nombres' => 'max:50|required',
-            'apellidos' => 'max:50|required',
-            'cedula' => 'max:16|required|unique:recepcionistas,cedula,'.$recepcionista->user_id.',user_id',
-            'telefono' => 'max:20|required',
-        ]);
-
-        $recepcionista->update($data);
-
-        return $recepcionista;
+        //
     }
 
     /**
@@ -77,7 +89,7 @@ class RecepcionistaController extends Controller
      */
     public function destroy(Recepcionista $recepcionista)
     {
-        $recepcionista->delete();
+        $recepcionista?->delete();
         return $recepcionista;
     }
 }

@@ -14,8 +14,18 @@ class UnidadController extends Controller
      */
     public function index()
     {
-        $unidad = Unidad::paginate(5);
+        $unidad = Unidad::paginate(10);
         return $unidad;
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -26,13 +36,7 @@ class UnidadController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'nombre' => 'max:50|required',
-            'municipio_id' => 'required',
-            'telefono' => 'max:20|required',
-        ]);
-
-        return Unidad::create($data);
+        //
     }
 
     /**
@@ -43,7 +47,18 @@ class UnidadController extends Controller
      */
     public function show(Unidad $unidad)
     {
-        return $unidad;
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  App\Models\Unidad  $unidad
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Unidad $unidad)
+    {
+        //
     }
 
     /**
@@ -55,15 +70,7 @@ class UnidadController extends Controller
      */
     public function update(Request $request, Unidad $unidad)
     {
-        $data = $request->validate([
-            'nombre' => 'max:50|required',
-            'municipio_id' => 'required',
-            'telefono' => 'max:20|required',
-        ]);
-
-        $unidad->update($data);
-
-        return $unidad;
+        //
     }
 
     /**
@@ -74,7 +81,7 @@ class UnidadController extends Controller
      */
     public function destroy(Unidad $unidad)
     {
-        $unidad->delete();
+        $unidad?->delete();
         return $unidad;
     }
 }
