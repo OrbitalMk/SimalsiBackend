@@ -5,11 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Paciente extends Model
+class RegionAnatomica extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'paciente_id';
+    /**
+     * The name of the table
+     * 
+     * @var string
+     */
+    protected $table = 'regiones';
+
+    protected $primaryKey = 'region_id';
 
     /**
      * The attributes that are mass assignable.
@@ -17,11 +24,6 @@ class Paciente extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'nombres',
-        'apellidos',
-        'nacimiento',
-        'inss',
-        'telefono',
-        'sexo',
+        'descripcion',
     ];
 }

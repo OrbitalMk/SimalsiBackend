@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Unidad;
+use App\Models\RegionAnatomica;
 
-class UnidadController extends Controller
+class RegionAnatomicaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class UnidadController extends Controller
      */
     public function index()
     {
-        $unidad = Unidad::paginate(5);
-        return $unidad;
+        $region = RegionAnatomica::paginate(5);
+        return $region;
     }
 
     /**
@@ -27,54 +27,50 @@ class UnidadController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nombre' => 'max:50|required',
-            'municipio_id' => 'required',
-            'telefono' => 'max:20|required',
+            'descripcion' => 'max:50|required',
         ]);
 
-        return Unidad::create($data);
+        return RegionAnatomica::create($data);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  App\Models\Unidad  $unidad
+     * @param  \App\Models\RegionAnatomica  $region
      * @return \Illuminate\Http\Response
      */
-    public function show(Unidad $unidad)
+    public function show(RegionAnatomica $region)
     {
-        return $unidad;
+        return $region;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  App\Models\Unidad  $unidad
+     * @param  \App\Models\RegionAnatomica  $region
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Unidad $unidad)
+    public function update(Request $request, RegionAnatomica $region)
     {
         $data = $request->validate([
-            'nombre' => 'max:50|required',
-            'municipio_id' => 'required',
-            'telefono' => 'max:20|required',
+            'descripcion' => 'max:50|required',
         ]);
 
-        $unidad->update($data);
+        $region->update($data);
 
-        return $unidad;
+        return $region;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  App\Models\Unidad  $unidad
+     * @param  \App\Models\RegionAnatomica  $region
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Unidad $unidad)
+    public function destroy(RegionAnatomica $region)
     {
-        $unidad->delete();
-        return $unidad;
+        $region->delete();
+        return $region;
     }
 }

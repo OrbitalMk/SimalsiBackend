@@ -19,16 +19,6 @@ class MedicoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -36,7 +26,14 @@ class MedicoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'nombres' => 'max:50|required',
+            'apellidos' => 'max:50|required',
+            'codigo_sanitario' => 'max:8|required|unique:medicos',
+            'telefono' => 'max:20|required',
+        ]);
+    
+        return Medico::create($data);
     }
 
     /**
@@ -47,18 +44,7 @@ class MedicoController extends Controller
      */
     public function show(Medico $medico)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Medico  $medico
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Medico $medico)
-    {
-        //
+        return $medico;
     }
 
     /**
@@ -70,7 +56,16 @@ class MedicoController extends Controller
      */
     public function update(Request $request, Medico $medico)
     {
-        //
+        $data = $request->validate([
+            'nombres' => 'max:50|required',
+            'apellidos' => 'max:50|required',
+            'codigo_sanitario' => 'max:8|required|unique:medicos,codigo_sanitario,'.$medico->medico_id.',medico_id',
+            'telefono' => 'max:20|required',
+        ]);
+
+        $medico->update($data);
+
+        return $medico;
     }
 
     /**
@@ -81,7 +76,7 @@ class MedicoController extends Controller
      */
     public function destroy(Medico $medico)
     {
-        $medico?->delete();
+        $medico->delete();
         return $medico;
     }
 }

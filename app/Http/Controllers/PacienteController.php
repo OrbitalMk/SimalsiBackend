@@ -19,16 +19,6 @@ class PacienteController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -36,7 +26,16 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'nombres' => 'max:50|required',
+            'apellidos' => 'max:50|required',
+            'nacimiento' => 'required|date_format:Y/m/d',
+            'inss' => 'max:8|nullable|unique:pacientes',
+            'telefono' => 'max:20|nullable',
+            'sexo' => 'required',
+        ]);
+
+        return Paciente::create($data);
     }
 
     /**
@@ -47,18 +46,7 @@ class PacienteController extends Controller
      */
     public function show(Paciente $paciente)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Paciente  $paciente
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Paciente $paciente)
-    {
-        //
+        return $paciente;
     }
 
     /**
@@ -70,7 +58,18 @@ class PacienteController extends Controller
      */
     public function update(Request $request, Paciente $paciente)
     {
-        //
+        $data = $request->validate([
+            'nombres' => 'max:50|required',
+            'apellidos' => 'max:50|required',
+            'inss' => 'max:8|nullable|unique:pacientes,inss,'.$paciente->paciente_id.',paciente_id',
+            'nacimiento' => 'required',
+            'sexo' => 'required',
+            'telefono' => 'max:20|nullable',
+        ]);
+
+        $paciente->update($data);
+
+        return $paciente;
     }
 
     /**
@@ -81,7 +80,7 @@ class PacienteController extends Controller
      */
     public function destroy(Paciente $paciente)
     {
-        $paciente?->delete();
+        $paciente->delete();
         return $paciente;
     }
 }
