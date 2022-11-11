@@ -4,11 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\PacienteController;
-use App\Http\Controllers\MedicoController;
-use App\Http\Controllers\UnidadController;
-use App\Http\Controllers\RecepcionistaController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\{PacienteController, MedicoController,
+    UnidadController, RecepcionistaController, UserController,
+    ProcedimientoQuirurgicoController, RegionAnatomicaController,
+    SolicitudAnatomicaController};
 
 /*
 |--------------------------------------------------------------------------
@@ -28,16 +27,61 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::get('/pacientes', [PacienteController::class, 'index']);
-Route::get('/medicos', [MedicoController::class, 'index']);
-Route::get('/unidades', [UnidadController::class, 'index']);
-Route::get('/recepcionistas', [RecepcionistaController::class, 'index']);
-Route::get('/users', [UserController::class, 'index']);
-
-Route::get('/paciente/delete/{paciente}', [PacienteController::class, 'destroy']);
-Route::get('/medico/delete/{medico}', [MedicoController::class, 'destroy']);
-Route::get('/unidad/delete/{unidad}', [UnidadController::class, 'destroy']);
-Route::get('/user/delete/{user}', [UserController::class, 'destroy']);
-
 Route::group([ 'middleware' => ['auth:sanctum'] ],function () {
+
+    Route::controller(PacienteController::class)->group(function() {
+        Route::get('pacientes', 'index');
+        Route::post('pacientes', 'store');
+        Route::get('pacientes/{paciente}', 'show');
+        Route::put('pacientes/{paciente}', 'update');
+        Route::delete('pacientes/{paciente}', 'destroy');
+    });
+    
+    Route::controller(MedicoController::class)->group(function() {
+        Route::get('medicos', 'index');
+        Route::post('medicos', 'store');
+        Route::get('medicos/{medico}', 'show');
+        Route::put('medicos/{medico}', 'update');
+        Route::delete('medicos/{medico}', 'destroy');
+    });
+    
+    Route::controller(UnidadController::class)->group(function() {
+        Route::get('unidades', 'index');
+        Route::post('unidades', 'store');
+        Route::get('unidades/{unidad}', 'show');
+        Route::put('unidades/{unidad}', 'update');
+        Route::delete('unidades/{unidad}', 'destroy');
+    });
+    
+    Route::controller(MedicoController::class)->group(function() {
+        Route::get('patologos', 'index');
+        Route::post('patologos', 'store');
+        Route::get('patologos/{patologo}', 'show');
+        Route::put('patologos/{patologo}', 'update');
+        Route::delete('patologos/{patologo}', 'destroy');
+    });
+
+    Route::controller(ProcedimientoQuirurgicoController::class)->group(function() {
+        Route::get('procedimientos', 'index');
+        Route::post('procedimientos', 'store');
+        Route::get('procedimientos/{procedimiento}', 'show');
+        Route::put('procedimientos/{procedimiento}', 'update');
+        Route::delete('procedimientos/{procedimiento}', 'destroy');
+    });
+
+    Route::controller(RegionAnatomicaController::class)->group(function() {
+        Route::get('regiones', 'index');
+        Route::post('regiones', 'store');
+        Route::get('regiones/{region}', 'show');
+        Route::put('regiones/{region}', 'update');
+        Route::delete('regiones/{region}', 'destroy');
+    });
+
+    Route::controller(SolicitudAnatomicaController::class)->group(function() {
+        Route::get('solicitudes', 'index');
+        Route::post('solicitudes', 'store');
+        Route::get('solicitudes/{solicitud}', 'show');
+        Route::put('solicitudes/{solicitud}', 'update');
+        Route::delete('solicitudes/{solicitud}', 'destroy');
+    });
 });

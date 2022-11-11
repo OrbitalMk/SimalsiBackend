@@ -19,16 +19,6 @@ class PatologoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -36,7 +26,14 @@ class PatologoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'nombres' => 'max:50|required',
+            'apellidos' => 'max:50|required',
+            'codigo_sanitario' => 'max:8|required|unique:patologos',
+            'telefono' => 'max:20|required',
+        ]);
+    
+        return Patologo::create($data);
     }
 
     /**
@@ -47,18 +44,7 @@ class PatologoController extends Controller
      */
     public function show(Patologo $patologo)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  App\Models\Patologo  $patologo
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Patologo $patologo)
-    {
-        //
+        return $patologo;
     }
 
     /**
@@ -70,7 +56,16 @@ class PatologoController extends Controller
      */
     public function update(Request $request, Patologo $patologo)
     {
-        //
+        $data = $request->validate([
+            'nombres' => 'max:50|required',
+            'apellidos' => 'max:50|required',
+            'codigo_sanitario' => 'max:8|required|unique:patologos,codigo_sanitario,'.$patologo->patologo_id.',patologo_id',
+            'telefono' => 'max:20|required',
+        ]);
+
+        $patologo->update($data);
+
+        return $patologo;
     }
 
     /**
@@ -81,7 +76,7 @@ class PatologoController extends Controller
      */
     public function destroy(Patologo $patologo)
     {
-        $patologo?->delete();
+        $patologo->delete();
         return $patologo;
     }
 }
