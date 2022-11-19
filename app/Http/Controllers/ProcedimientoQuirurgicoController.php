@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\ProcedimientoQuirurgico;
+use App\Http\Requests\ProcedimientoQuirurgico\StoreProcedimientoQuirurgico;
+use App\Http\Requests\ProcedimientoQuirurgico\UpdateProcedimientoQuirurgico;
 
 class ProcedimientoQuirurgicoController extends Controller
 {
@@ -21,15 +22,12 @@ class ProcedimientoQuirurgicoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProcedimientoQuirurgico\StoreProcedimientoQuirurgico  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProcedimientoQuirurgico $request)
     {
-        $data = $request->validate([
-            'descripcion' => 'max:30|required',
-            'region_id' => 'required',
-        ]);
+        $data = $request->validated();
 
         return ProcedimientoQuirurgico::create($data);
     }
@@ -48,16 +46,13 @@ class ProcedimientoQuirurgicoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProcedimientoQuirurgico\UpdateProcedimientoQuirurgico  $request
      * @param  \App\Models\ProcedimientoQuirurgico  $procedimiento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProcedimientoQuirurgico $procedimiento)
+    public function update(UpdateProcedimientoQuirurgico $request, ProcedimientoQuirurgico $procedimiento)
     {
-        $data = $request->validate([
-            'descripcion' => 'max:50|required',
-            'region_id' => 'required',
-        ]);
+        $data = $request->validated();
 
         $procedimiento->update($data);
 

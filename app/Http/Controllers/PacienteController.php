@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paciente;
-use Illuminate\Http\Request;
+use App\Http\Requests\Paciente\StorePacienteRequest;
+use App\Http\Requests\Paciente\UpdatePacienteRequest;
 
 class PacienteController extends Controller
 {
@@ -21,19 +22,12 @@ class PacienteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Request\Paciente\StorePacienteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePacienteRequest $request)
     {
-        $data = $request->validate([
-            'nombres' => 'max:50|required',
-            'apellidos' => 'max:50|required',
-            'nacimiento' => 'required|date_format:Y/m/d',
-            'inss' => 'max:8|nullable|unique:pacientes',
-            'telefono' => 'max:20|nullable',
-            'sexo' => 'required',
-        ]);
+        $data = $request->validated();
 
         return Paciente::create($data);
     }
@@ -52,20 +46,13 @@ class PacienteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Paciente\UpdatePacienteRequest  $request
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Paciente $paciente)
+    public function update(UpdatePacienteRequest $request, Paciente $paciente)
     {
-        $data = $request->validate([
-            'nombres' => 'max:50|required',
-            'apellidos' => 'max:50|required',
-            'inss' => 'max:8|nullable|unique:pacientes,inss,'.$paciente->paciente_id.',paciente_id',
-            'nacimiento' => 'required',
-            'sexo' => 'required',
-            'telefono' => 'max:20|nullable',
-        ]);
+        $data = $request->validated();
 
         $paciente->update($data);
 

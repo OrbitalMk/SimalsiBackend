@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{Model, softDeletes};
 use App\Models\Municipio;
 
 class Unidad extends Model
 {
-    use HasFactory;
+    use HasFactory, softDeletes;
 
     /**
      * The name of the table

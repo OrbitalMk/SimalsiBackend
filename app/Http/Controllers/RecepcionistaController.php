@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recepcionista;
-use Illuminate\Http\Request;
+use App\Http\Requests\Recepcionista\StoreRecepcionistaRequest;
+use App\Http\Requests\Recepcionista\UpdateRecepcionistaRequest;
 
 class RecepcionistaController extends Controller
 {
@@ -22,17 +23,12 @@ class RecepcionistaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Recepcionista\StoreRecepcionistaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRecepcionistaRequest $request)
     {
-        $data = $request->validate([
-            'nombres' => 'max:50|required',
-            'apellidos' => 'max:50|required',
-            'cedula' => 'max:16|required|unique:recepcionistas',
-            'telefono' => 'max:20|required',
-        ]);
+        $data = $request->validated();
     
         return Recepcionista::create($data);
     }
@@ -51,18 +47,13 @@ class RecepcionistaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Recepcionista\UpdateRecepcionistaRequest  $request
      * @param  \App\Models\Recepcionista  $recepcionista
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recepcionista $recepcionista)
+    public function update(UpdateRecepcionistaRequest $request, Recepcionista $recepcionista)
     {
-        $data = $request->validate([
-            'nombres' => 'max:50|required',
-            'apellidos' => 'max:50|required',
-            'cedula' => 'max:16|required|unique:recepcionistas,cedula,'.$recepcionista->user_id.',user_id',
-            'telefono' => 'max:20|required',
-        ]);
+        $data = $request->validated();
 
         $recepcionista->update($data);
 

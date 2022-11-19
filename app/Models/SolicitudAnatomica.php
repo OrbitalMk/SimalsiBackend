@@ -18,7 +18,18 @@ class SolicitudAnatomica extends Model
 
     protected $primaryKey = 'solicitud_id';
 
+    public $timestamps = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     public $fillable = [
         'procedimiento_id',
     ];
+
+    function solicitud() {
+        return $this->belongsTo(Solicitud::class, 'solicitud_id');
+    }
 }

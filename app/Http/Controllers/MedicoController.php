@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Medico;
 use Illuminate\Http\Request;
+use App\Http\Requests\Medico\StoreMedicoRequest;
+use App\Http\Requests\Medico\UpdateMedicoRequest;
 
 class MedicoController extends Controller
 {
@@ -21,17 +23,12 @@ class MedicoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Medico\StoreMedicoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMedicoRequest $request)
     {
-        $data = $request->validate([
-            'nombres' => 'max:50|required',
-            'apellidos' => 'max:50|required',
-            'codigo_sanitario' => 'max:8|required|unique:medicos',
-            'telefono' => 'max:20|required',
-        ]);
+        $data = $request->validated();
     
         return Medico::create($data);
     }
@@ -50,18 +47,13 @@ class MedicoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Medico\UpdateMedicoRequest  $request
      * @param  \App\Models\Medico  $medico
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Medico $medico)
+    public function update(UpdateMedicoRequest $request, Medico $medico)
     {
-        $data = $request->validate([
-            'nombres' => 'max:50|required',
-            'apellidos' => 'max:50|required',
-            'codigo_sanitario' => 'max:8|required|unique:medicos,codigo_sanitario,'.$medico->medico_id.',medico_id',
-            'telefono' => 'max:20|required',
-        ]);
+        $data = $request->validated();
 
         $medico->update($data);
 

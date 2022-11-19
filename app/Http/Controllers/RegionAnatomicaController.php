@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\RegionAnatomica;
+use App\Http\Requests\RegionAnatomica\StoreRegionAnatomicaRequest;
+use App\Http\Requests\RegionAnatomica\UpdateRegionAnatomicaRequest;
 
 class RegionAnatomicaController extends Controller
 {
@@ -21,14 +22,12 @@ class RegionAnatomicaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\RegionAnatomica\StoreRegionAnatomicaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRegionAnatomicaRequest $request)
     {
-        $data = $request->validate([
-            'descripcion' => 'max:50|required',
-        ]);
+        $data = $request->validated();
 
         return RegionAnatomica::create($data);
     }
@@ -47,15 +46,13 @@ class RegionAnatomicaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\RegionAnatomica\UpdateRegionAnatomicaRequest  $request
      * @param  \App\Models\RegionAnatomica  $region
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RegionAnatomica $region)
+    public function update(UpdateRegionAnatomicaRequest $request, RegionAnatomica $region)
     {
-        $data = $request->validate([
-            'descripcion' => 'max:50|required',
-        ]);
+        $data = $request->validated();
 
         $region->update($data);
 

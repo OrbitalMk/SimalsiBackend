@@ -16,7 +16,7 @@ class SolicitudAnatomicaController extends Controller
      */
     public function index()
     {
-        $solicitudap = SolicitudAnatomica::paginate(5);
+        $solicitudap = Solicitud::with('solicitud')->paginate(5);
         return $solicitudap;
     }
 
@@ -28,7 +28,7 @@ class SolicitudAnatomicaController extends Controller
      */
     public function store(Request $request)
     {
-        DB::transaction(function () use ($request) {
+        return DB::transaction(function () use ($request) {
             $data = $request->validate([
                 'fecha_muestra' => 'required',
                 'paciente_id' => 'required',
@@ -37,12 +37,18 @@ class SolicitudAnatomicaController extends Controller
                 'unidad_id' => 'required',
             ]);
 
+            $procedimiento = $request->validate([
+                'procedimiento_id' => 'required'
+            ]);
+
             $solicitud = Solicitud::create($data);
 
-            /*DB::insert(
+            DB::insert(
                 'insert into solicitudap (solicitud_id, procedimiento_id) values (?, ?)',
-                [1, 1]
-            );*/
+                [$solicitud->solicitud_id, $procedimiento['procedimiento_id']]
+            );
+
+            return Solicitud::with('solicitud')->where('solicitud_id', $solicitud->solicitud_id)->get();
         });
     }
 
@@ -54,7 +60,7 @@ class SolicitudAnatomicaController extends Controller
      */
     public function show(SolicitudAnatomica $solicitudap)
     {
-        return $solicitudap;
+        return Solicitud::with('solicitud')->where('solicitud_id', $solicitudap->solicitud_id)->get();
     }
 
     /**
@@ -66,16 +72,37 @@ class SolicitudAnatomicaController extends Controller
      */
     public function update(Request $request, SolicitudAnatomica $solicitudap)
     {
-        //
+        return DB::transaction(function () use ($request, $solicitudap) {
+            $data = $request->validate([
+                'fecha_muestra' => 'required',
+                'paciente_id' => 'required',
+                'medico_id' => 'required',
+                'user_id' => 'required',
+                'unidad_id' => 'required',
+            ]);
+
+            $procedimiento = $request->validate([
+                'procedimiento_id' => 'required'
+            ]);
+
+            $solicitudap->solicitud->update($data);
+
+            DB::update(
+                'update solicitudap set procedimiento_id=? where solicitud_id=?',
+                [$procedimiento['procedimiento_id'], $solicitudap->solicitud_id]
+            );
+
+            return Solicitud::with('solicitud')->where('solicitud_id', $solicitudap->solicitud_id)->get();
+        });
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SolicitudAnatomica  $solicitudap
+     * @param  \App\Models\Solicitud  $solicitudap
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SolicitudAnatomica $solicitudap)
+    public function destroy(Solicitud $solicitudap)
     {
         $solicitudap->delete();
         return $solicitudap;

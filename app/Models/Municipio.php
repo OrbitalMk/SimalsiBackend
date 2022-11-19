@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{Model, softDeletes};
 use App\Models\Departamento;
 use App\Models\Unidad;
 
 class Municipio extends Model
 {
-    use HasFactory;
+    use HasFactory, softDeletes;
 
     protected $primaryKey = 'municipio_id';
 

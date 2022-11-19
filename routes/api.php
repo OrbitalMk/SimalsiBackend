@@ -80,8 +80,8 @@ Route::group([ 'middleware' => ['auth:sanctum'] ],function () {
     Route::controller(SolicitudAnatomicaController::class)->group(function() {
         Route::get('solicitudes', 'index');
         Route::post('solicitudes', 'store');
-        Route::get('solicitudes/{solicitud}', 'show');
-        Route::put('solicitudes/{solicitud}', 'update');
-        Route::delete('solicitudes/{solicitud}', 'destroy');
+        Route::get('solicitudes/{solicitudap}', 'show');
+        Route::put('solicitudes/{solicitudap}', 'update');
+        Route::delete('solicitudes/{solicitudap}', 'destroy');
     });
 });

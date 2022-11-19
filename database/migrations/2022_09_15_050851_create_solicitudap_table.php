@@ -18,8 +18,6 @@ return new class extends Migration
             $table->primary('solicitud_id');
             
             $table->foreignId('procedimiento_id')->references('procedimiento_id')->on('procedimientos');
-            $table->timestamps();
-            $table->softDeletes();
         });
     }
 

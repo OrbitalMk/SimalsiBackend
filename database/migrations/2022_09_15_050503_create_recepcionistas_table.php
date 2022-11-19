@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('apellidos', 50);
             $table->string('cedula', 25)->unique();
             $table->string('telefono', 20)->nullable();
-            $table->timestamps();
         });
     }
 

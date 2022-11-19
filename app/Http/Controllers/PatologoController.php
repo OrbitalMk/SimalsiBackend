@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Patologo;
+use App\Http\Requests\Patologo\StorePatologoRequest;
+use App\Http\Requests\Patologo\UpddatePatologoRequest;
 
 class PatologoController extends Controller
 {
@@ -21,17 +22,12 @@ class PatologoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Patologo\StorePatologoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePatologoRequest $request)
     {
-        $data = $request->validate([
-            'nombres' => 'max:50|required',
-            'apellidos' => 'max:50|required',
-            'codigo_sanitario' => 'max:8|required|unique:patologos',
-            'telefono' => 'max:20|required',
-        ]);
+        $data = $request->validated();
     
         return Patologo::create($data);
     }
@@ -39,7 +35,7 @@ class PatologoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  App\Models\Patologo  $patologo
+     * @param  \App\Models\Patologo  $patologo
      * @return \Illuminate\Http\Response
      */
     public function show(Patologo $patologo)
@@ -50,18 +46,13 @@ class PatologoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  App\Models\Patologo  $patologo
+     * @param  \App\Http\Requests\Patologo\UpddatePatologoRequest  $request
+     * @param  \App\Models\Patologo  $patologo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patologo $patologo)
+    public function update(UpddatePatologoRequest $request, Patologo $patologo)
     {
-        $data = $request->validate([
-            'nombres' => 'max:50|required',
-            'apellidos' => 'max:50|required',
-            'codigo_sanitario' => 'max:8|required|unique:patologos,codigo_sanitario,'.$patologo->patologo_id.',patologo_id',
-            'telefono' => 'max:20|required',
-        ]);
+        $data = $request->validated();
 
         $patologo->update($data);
 
@@ -71,7 +62,7 @@ class PatologoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  App\Models\Patologo  $patologo
+     * @param  \App\Models\Patologo  $patologo
      * @return \Illuminate\Http\Response
      */
     public function destroy(Patologo $patologo)

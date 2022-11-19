@@ -3,20 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\{Model, softDeletes};
+use Illuminate\Database\Eloquent\Model;
 
-class ProcedimientoQuirurgico extends Model
+class ResultadoAnatomico extends Model
 {
-    use HasFactory, softDeletes;
+    use HasFactory;
 
     /**
      * The name of the table
      * 
      * @var string
      */
-    protected $table = 'procedimientos';
+    protected $table = 'resultadoap';
 
-    protected $primaryKey = 'procedimiento_id';
+    protected $primaryKey = 'solicitud_id';
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +24,8 @@ class ProcedimientoQuirurgico extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'descripcion',
-        'region_id',
+        'resultado',
+        'descripcion_macroscopica',
+        'patologo_id',
     ];
 }
