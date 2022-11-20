@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\{PacienteController, MedicoController,
-    UnidadController, RecepcionistaController, UserController,
+    UnidadController, RecepcionistaController, PatologoController,
     ProcedimientoQuirurgicoController, RegionAnatomicaController,
     SolicitudAnatomicaController};
 
@@ -53,7 +53,7 @@ Route::group([ 'middleware' => ['auth:sanctum'] ],function () {
         Route::delete('unidades/{unidad}', 'destroy');
     });
     
-    Route::controller(MedicoController::class)->group(function() {
+    Route::controller(PatologoController::class)->group(function() {
         Route::get('patologos', 'index');
         Route::post('patologos', 'store');
         Route::get('patologos/{patologo}', 'show');

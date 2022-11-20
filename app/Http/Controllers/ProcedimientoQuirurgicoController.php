@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProcedimientoQuirurgico;
-use App\Http\Requests\ProcedimientoQuirurgico\StoreProcedimientoQuirurgico;
-use App\Http\Requests\ProcedimientoQuirurgico\UpdateProcedimientoQuirurgico;
+use App\Http\Requests\ProcedimientoQuirurgico\StoreProcedimientoQuirurgicoRequest;
+use App\Http\Requests\ProcedimientoQuirurgico\UpdateProcedimientoQuirurgicoRequest;
 
 class ProcedimientoQuirurgicoController extends Controller
 {
@@ -22,10 +22,10 @@ class ProcedimientoQuirurgicoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\ProcedimientoQuirurgico\StoreProcedimientoQuirurgico  $request
+     * @param  \App\Http\Requests\ProcedimientoQuirurgico\StoreProcedimientoQuirurgicoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProcedimientoQuirurgico $request)
+    public function store(StoreProcedimientoQuirurgicoRequest $request)
     {
         $data = $request->validated();
 
@@ -46,11 +46,11 @@ class ProcedimientoQuirurgicoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\ProcedimientoQuirurgico\UpdateProcedimientoQuirurgico  $request
+     * @param  \App\Http\Requests\ProcedimientoQuirurgico\UpdateProcedimientoQuirurgicoRequest  $request
      * @param  \App\Models\ProcedimientoQuirurgico  $procedimiento
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProcedimientoQuirurgico $request, ProcedimientoQuirurgico $procedimiento)
+    public function update(UpdateProcedimientoQuirurgicoRequest $request, ProcedimientoQuirurgico $procedimiento)
     {
         $data = $request->validated();
 

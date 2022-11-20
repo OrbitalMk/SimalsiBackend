@@ -30,7 +30,7 @@ class SolicitudAnatomicaController extends Controller
     {
         return DB::transaction(function () use ($request) {
             $data = $request->validate([
-                'fecha_muestra' => 'required',
+                'fecha_muestra' => 'required|date_format:Y/m/d',
                 'paciente_id' => 'required',
                 'medico_id' => 'required',
                 'user_id' => 'required',
