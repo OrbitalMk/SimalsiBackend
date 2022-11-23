@@ -16,6 +16,7 @@ class SolicitudAnatomicaController extends Controller
      */
     public function index()
     {
+        /*Request*/
         $solicitudap = Solicitud::with('solicitud')->paginate(5);
         return $solicitudap;
     }
