@@ -23,6 +23,8 @@ class Solicitud extends Model
      *
      * @var array<int, string>
      */
+    //Varibales
+    //SQL
     public $fillable = [
         'fecha_muestra',
         'paciente_id',
