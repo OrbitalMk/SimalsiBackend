@@ -26,4 +26,9 @@ class RegionAnatomica extends Model
     protected $fillable = [
         'descripcion',
     ];
+
+    public function procedimiento()
+    {
+        return $this->hasMany(Municipio::class, 'region_id');
+    }
 }

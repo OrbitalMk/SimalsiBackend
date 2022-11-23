@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{Model, softDeletes};
+use App\Models\RegionAnatomica;
 
 class ProcedimientoQuirurgico extends Model
 {
@@ -27,4 +28,9 @@ class ProcedimientoQuirurgico extends Model
         'descripcion',
         'region_id',
     ];
+
+    public function region()
+    {
+        return $this->belongsTo(RegionAnatomica::class, 'region_id');
+    }
 }

@@ -15,7 +15,7 @@ class UnidadController extends Controller
      */
     public function index()
     {
-        $unidad = Unidad::paginate(5);
+        $unidad = Unidad::with('municipio.departamento')->paginate(5);
         return $unidad;
     }
 

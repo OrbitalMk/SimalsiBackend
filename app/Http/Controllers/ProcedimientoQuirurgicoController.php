@@ -15,7 +15,7 @@ class ProcedimientoQuirurgicoController extends Controller
      */
     public function index()
     {
-        $procedimiento = ProcedimientoQuirurgico::paginate(5);
+        $procedimiento = ProcedimientoQuirurgico::with('region')->paginate(5);
         return $procedimiento;
     }
 

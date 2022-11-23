@@ -27,6 +27,7 @@ class Unidad extends Model
     protected $fillable = [
         'nombre',
         'telefono',
+        'municipio_id',
     ];
 
     public function municipio()

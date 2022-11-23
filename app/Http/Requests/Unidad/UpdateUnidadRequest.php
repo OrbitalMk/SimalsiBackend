@@ -26,7 +26,7 @@ class UpdateUnidadRequest extends FormRequest
         return [
             'nombre' => 'max:50|required',
             'municipio_id' => 'required',
-            'telefono' => 'max:20|required',
+            'telefono' => 'max:20|nullable',
         ];
     }
 }

@@ -27,7 +27,7 @@ class UpdateMedicoRequest extends FormRequest
             'nombres' => 'max:50|required',
             'apellidos' => 'max:50|required',
             'codigo_sanitario' => 'max:8|required|unique:medicos,codigo_sanitario,'. $this->medico_id .',medico_id',
-            'telefono' => 'max:20|required',
+            'telefono' => 'max:20|nullable',
         ];
     }
 }

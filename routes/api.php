@@ -9,6 +9,8 @@ use App\Http\Controllers\{PacienteController, MedicoController,
     ProcedimientoQuirurgicoController, RegionAnatomicaController,
     SolicitudAnatomicaController};
 
+use App\Models\Departamento;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,6 +28,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
+
+Route::get('departamentos', function() {
+    return Departamento::all();
+});
+
+Route::get('departamentos/{departamento}/municipios', function(Request $request, Departamento $departamento) {
+    return $departamento->municipio;
+});
 
 Route::group([ 'middleware' => ['auth:sanctum'] ],function () {
 
