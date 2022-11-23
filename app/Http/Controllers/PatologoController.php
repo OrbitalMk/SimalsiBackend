@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patologo;
 use App\Http\Requests\Patologo\StorePatologoRequest;
-use App\Http\Requests\Patologo\UpddatePatologoRequest;
+use App\Http\Requests\Patologo\UpdatePatologoRequest;
 
 class PatologoController extends Controller
 {
@@ -46,11 +46,11 @@ class PatologoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Patologo\UpddatePatologoRequest  $request
+     * @param  \App\Http\Requests\Patologo\UpdatePatologoRequest  $request
      * @param  \App\Models\Patologo  $patologo
      * @return \Illuminate\Http\Response
      */
-    public function update(UpddatePatologoRequest $request, Patologo $patologo)
+    public function update(UpdatePatologoRequest $request, Patologo $patologo)
     {
         $data = $request->validated();
 

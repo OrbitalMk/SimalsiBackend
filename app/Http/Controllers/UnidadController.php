@@ -40,7 +40,7 @@ class UnidadController extends Controller
      */
     public function show(Unidad $unidad)
     {
-        return $unidad;
+        return Unidad::with('municipio')->where('unidad_id', $unidad->unidad_id)->first();
     }
 
     /**
