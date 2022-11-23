@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\PersonalAccessToken;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -36,8 +37,12 @@ class AuthController extends Controller
     /**
      * Logout
      */
-    public function logout() {
-        auth()->user()->tokens()->delete();
+    public function logout(Request $request) {
+        $accessToken = $request->bearerToken();
+
+        $token = PersonalAccessToken::findToken($accessToken);
+        $token?->delete();
+
         return response([
             'message' => 'logged out'
         ], 200);

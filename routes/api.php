@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\{PacienteController, MedicoController,
     UnidadController, RecepcionistaController, PatologoController,
     ProcedimientoQuirurgicoController, RegionAnatomicaController,
-    SolicitudAnatomicaController};
+    RececpcionistaController, SolicitudAnatomicaController};
 
 use App\Models\Departamento;
 
@@ -38,6 +38,14 @@ Route::get('departamentos/{departamento}/municipios', function(Request $request,
 });
 
 Route::group([ 'middleware' => ['auth:sanctum'] ],function () {
+
+    Route::controller(RecepcionistaController::class)->group(function() {
+        Route::get('recepcionistas', 'index');
+        Route::post('recepcionistas', 'store');
+        Route::get('recepcionistas/{recepcionista}', 'show');
+        Route::put('recepcionistas/{recepcionista}', 'update');
+        Route::delete('recepcionistas/{recepcionista}', 'destroy');
+    });
 
     Route::controller(PacienteController::class)->group(function() {
         Route::get('pacientes', 'index');

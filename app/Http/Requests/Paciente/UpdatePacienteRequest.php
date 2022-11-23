@@ -29,7 +29,7 @@ class UpdatePacienteRequest extends FormRequest
             'inss' => 'max:8|nullable|unique:pacientes,inss,'. $this->paciente_id .',paciente_id',
             'nacimiento' => 'required',
             'sexo' => 'required',
-            'telefono' => 'max:20|nullable',
+            'telefono' => 'max:20|required',
         ];
     }
 }

@@ -27,7 +27,7 @@ class UpdatePatologoRequest extends FormRequest
             'nombres' => 'max:50|required',
             'apellidos' => 'max:50|required',
             'codigo_sanitario' => 'max:8|required|unique:patologos,codigo_sanitario,'. $this->patologo_id .',patologo_id',
-            'telefono' => 'max:20|nullable',
+            'telefono' => 'max:20|required',
         ];
     }
 }
