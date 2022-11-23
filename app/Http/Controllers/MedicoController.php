@@ -14,6 +14,7 @@ class MedicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /*Aqui el nate troleo */
     public function index()
     {
         $medico = Medico::paginate(5);
